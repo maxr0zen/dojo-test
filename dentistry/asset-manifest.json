@@ -1,0 +1,165 @@
+{
+  "figmaFileKey": "KXdeNjLaI0ntn0D0vyIY7Z",
+  "frames": {
+    "desktop": "5:19110",
+    "mobile": "5:9483"
+  },
+  "assets": [
+    {
+      "file": "5-18631-imgSubtract.png",
+      "bytes": 68155
+    },
+    {
+      "file": "5-18642-imgSubtract.png",
+      "bytes": 127197
+    },
+    {
+      "file": "5-18684-imgFrame598.svg",
+      "bytes": 478
+    },
+    {
+      "file": "5-19168-imgFrame597.svg",
+      "bytes": 476
+    },
+    {
+      "file": "5-19418-imgGroup71.svg",
+      "bytes": 1319
+    },
+    {
+      "file": "5-19418-imgSubtract.png",
+      "bytes": 766080
+    },
+    {
+      "file": "5-19429-imgSubtract.png",
+      "bytes": 381674
+    },
+    {
+      "file": "5-19440-imgSubtract.png",
+      "bytes": 927431
+    },
+    {
+      "file": "5-19451-imgSubtract.png",
+      "bytes": 376103
+    },
+    {
+      "file": "5-19463-imgSubtract.png",
+      "bytes": 720595
+    },
+    {
+      "file": "5-19478-imgSubtract.png",
+      "bytes": 355692
+    },
+    {
+      "file": "5-19489-imgSubtract.png",
+      "bytes": 848526
+    },
+    {
+      "file": "5-28469-imgSubtract.png",
+      "bytes": 371781
+    },
+    {
+      "file": "5-28481-imgSubtract.png",
+      "bytes": 770530
+    },
+    {
+      "file": "5-9579-imgGroup71.svg",
+      "bytes": 1454
+    },
+    {
+      "file": "5-9579-imgSubtract.png",
+      "bytes": 130392
+    },
+    {
+      "file": "5-9590-imgSubtract.png",
+      "bytes": 69210
+    },
+    {
+      "file": "5-9601-imgSubtract.png",
+      "bytes": 146200
+    },
+    {
+      "file": "5-9613-imgSubtract.png",
+      "bytes": 67540
+    },
+    {
+      "file": "5-9624-imgSubtract.png",
+      "bytes": 124571
+    },
+    {
+      "file": "5-9639-imgSubtract.png",
+      "bytes": 63715
+    },
+    {
+      "file": "5-9650-imgSubtract.png",
+      "bytes": 140809
+    },
+    {
+      "file": "clinic-logo.png",
+      "bytes": 369731
+    },
+    {
+      "file": "desktop-background.png",
+      "bytes": 205282
+    },
+    {
+      "file": "desktop-portrait.png",
+      "bytes": 218208
+    },
+    {
+      "file": "luma-logo.png",
+      "bytes": 506602
+    },
+    {
+      "file": "Manrope-Medium.ttf",
+      "bytes": 95060
+    },
+    {
+      "file": "Manrope-OFL.txt",
+      "bytes": 4387
+    },
+    {
+      "file": "Manrope-SemiBold.ttf",
+      "bytes": 95096
+    },
+    {
+      "file": "mobile-background.png",
+      "bytes": 172733
+    },
+    {
+      "file": "mobile-portrait.png",
+      "bytes": 159944
+    },
+    {
+      "file": "Montserrat-Bold.ttf",
+      "bytes": 181028
+    },
+    {
+      "file": "Montserrat-Medium.ttf",
+      "bytes": 180036
+    },
+    {
+      "file": "Montserrat-SemiBold.ttf",
+      "bytes": 180584
+    },
+    {
+      "file": "OFL.txt",
+      "bytes": 4400
+    },
+    {
+      "file": "Unbounded-Medium.ttf",
+      "bytes": 347348
+    },
+    {
+      "file": "Unbounded-OFL.txt",
+      "bytes": 4392
+    },
+    {
+      "file": "Unbounded-SemiBold.ttf",
+      "bytes": 348108
+    }
+  ],
+  "localFonts": {
+    "Manrope": "https://github.com/google/fonts/tree/main/ofl/manrope",
+    "Unbounded": "https://github.com/google/fonts/tree/main/ofl/unbounded"
+  }
+}

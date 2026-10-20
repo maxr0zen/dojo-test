@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.taste-skill/
+verification/
+previews/
+playwright-report/
+test-results/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example

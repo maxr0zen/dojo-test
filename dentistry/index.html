@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Люма — стоматология. Услуги и демонстрационная форма записи на консультацию.">
+  <title>Люма — стоматология</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="modal.css">
+  <link rel="stylesheet" href="visual.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="draft-style.css">
+  <link rel="stylesheet" href="studio.css">
+  <script type="module" src="app.js"></script>
+  <script type="module" src="shell.js"></script>
+  <script type="module" src="motion.js"></script>
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+  <header class="site-header">
+    <div class="header-brand">
+      <a class="brand header-logo" href="#services"><img src="assets/luma-logo.png" alt="Люма — стоматология" width="2172" height="724"></a>
+      <span class="brand-descriptor">Стоматология</span>
+    </div>
+    <button class="button header-booking" type="button" data-booking>Записаться на прием<span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" focusable="false"><path d="M6 18 18 6M6 6h12v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+  </header>
+  <main id="main-content">
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="services-heading"><h1 id="services-title">Услуги</h1></div>
+      <div class="service-carousel">
+        <div class="service-track" id="service-track" role="region" aria-label="Услуги: горизонтальная прокрутка" tabindex="0"></div>
+        <div class="service-controls"><button type="button" class="service-prev" aria-label="Предыдущие услуги" aria-controls="service-track"><span aria-hidden="true">←</span></button><button type="button" class="service-next" aria-label="Следующие услуги" aria-controls="service-track"><span aria-hidden="true">→</span></button></div>
+      </div>
+    </section>
+    <div class="booking-zone">
+    <section class="appointment" id="appointment" aria-labelledby="appointment-title">
+      <div class="form-background" aria-hidden="true"></div>
+      <picture class="portrait" aria-hidden="true">
+        <source media="(max-width: 767px)" srcset="assets/mobile-portrait.png">
+        <img src="assets/desktop-portrait.png" alt="">
+      </picture>
+      <div class="form-content">
+        <h2 id="appointment-title"><span class="desktop-title">Запишитесь на бесплатную<br>консультацию прямо сейчас!</span><span class="mobile-title">Запишитесь на бесплатную консультацию прямо сейчас!</span></h2>
+        <p class="intro">Хотите узнать подробнее? Наши специалисты ответят на все ваши вопросы и помогут<span class="desktop-break"><br></span><span class="mobile-space"> </span>выбрать оптимальный путь к здоровой и красивой улыбке.</p>
+        <form novalidate>
+          <div class="form-fields">
+            <label class="field" for="full-name"><span>Введите ФИО</span><input id="full-name" name="fullName" autocomplete="name" placeholder="Иванов Иван Иванович" required maxlength="150" aria-describedby="form-feedback"></label>
+            <label class="field" for="phone"><span>Введите номер телефона</span><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (999) 999 99 99" required maxlength="24" aria-describedby="form-feedback"></label>
+          </div>
+          <button class="button submit" type="submit"><span>Записаться на прием</span></button>
+          <div class="consent">
+            <input type="checkbox" id="consent" name="consent" checked required aria-describedby="form-feedback">
+            <p><label for="consent">я даю свое согласие на&nbsp;</label><a href="#consent-information" class="policy">обработку персональных данных</a></p>
+          </div>
+        </form>
+      </div>
+    </section>
+    </div>
+    <div class="feedback" id="form-feedback" role="status" aria-live="polite" aria-atomic="true" hidden><span></span><button type="button" aria-label="Закрыть уведомление">×</button></div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand"><p class="footer-invitation">Здоровая и красивая улыбка</p><button type="button" class="footer-booking" data-booking>Записаться на консультацию <span aria-hidden="true">↗</span></button></div>
+      <nav class="footer-links" aria-label="Услуги в нижней панели"><p>Услуги</p><button type="button" data-service="Элайнеры">Элайнеры</button><button type="button" data-service="Имплантация">Имплантация</button><button type="button" data-service="Брекеты">Брекеты</button><button type="button" data-service="Терапия">Терапия</button><button type="button" data-service="Гигиена полости рта">Гигиена полости рта</button></nav>
+      <nav class="footer-links" aria-label="Другие направления в нижней панели"><p>Направления</p><button type="button" data-service="Хирургия">Хирургия</button><button type="button" data-service="Гнатология">Гнатология</button><button type="button" data-service="Протезирование">Протезирование</button><button type="button" data-service="Эстетическая стоматология">Эстетическая стоматология</button></nav>
+    </div>
+    <a class="brand footer-logo" href="#services"><img src="assets/luma-logo.png" alt="Люма — стоматология" width="2172" height="724" loading="lazy"></a>
+    <div class="footer-bottom"><p>Демонстрационная версия. Заявки не передаются в клинику.</p><button type="button" data-policy>Обработка персональных данных</button><a href="#services" aria-label="Вернуться к услугам">Наверх ↑</a></div>
+  </footer>
+  <dialog class="modal" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="Закрыть окно">×</button>
+    <h2 id="modal-title"></h2>
+    <div class="modal-body"></div>
+  </dialog>
+</body>
+</html>

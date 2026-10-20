@@ -1,0 +1,126 @@
+/* Visual layer only: the draft's content, original assets and service order are unchanged. */
+body { isolation: isolate; }
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 55% at 93% 4%, #38bfc41a, transparent 75%),
+    radial-gradient(ellipse 45% 55% at 4% 82%, #7ba5ef24, transparent 80%),
+    linear-gradient(125deg, #ffffff55, transparent 60%);
+}
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(#22395915 .7px, transparent .7px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, #0008, transparent 85%);
+}
+.services h1 {
+  display: flex; align-items: center; gap: 24px;
+  letter-spacing: -.035em;
+}
+.services h1::after {
+  content: ''; display: block; width: clamp(64px, 12vw, 176px); height: 3px;
+  border-radius: 3px; background: linear-gradient(90deg, #38bfc4, #38bfc400);
+}
+.service-track { padding-block: 16px; margin-block: -16px; }
+.service-card {
+  transition: transform 240ms ease, filter 240ms ease;
+  animation: card-arrive 460ms backwards;
+  animation-delay: calc(min(var(--card-order, 0), 2) * 70ms);
+}
+.service-card::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: linear-gradient(140deg, #ffffff40, transparent 50%);
+  mask: var(--card-mask) center / 100% 100% no-repeat;
+  opacity: 0; transition: opacity 240ms ease;
+}
+.service-image { filter: drop-shadow(0 7px 7px #22395912); }
+.service-card h2 { text-shadow: 0 2px 14px #12223970; }
+.card-actions { z-index: 2; }
+.button { position: relative; overflow: hidden; }
+.button::after {
+  content: ''; position: absolute; inset: -60% -50%; pointer-events: none;
+  background: linear-gradient(100deg, transparent 40%, #ffffff30 50%, transparent 60%);
+  transform: translateX(-65%); transition: transform 500ms ease;
+}
+.consult { box-shadow: inset 0 1px 0 #ffffff29, 0 3px 8px #22395912; }
+.arrow { transition: filter 180ms ease, transform 180ms ease; }
+.submit {
+  box-shadow: inset 0 1px 0 #ffffff55, 0 6px 18px #102e482e;
+  transition: filter 180ms ease, box-shadow 180ms ease;
+}
+.appointment { isolation: isolate; }
+.form-background { filter: drop-shadow(0 16px 24px #22395920); }
+.appointment::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 90% 0%, #55d6da24, transparent 55%);
+  mask: url('assets/desktop-background.png') center / 100% 100% no-repeat;
+}
+.appointment .portrait, .appointment .form-content { z-index: 1; }
+.field input {
+  box-shadow: inset 0 1px 3px #2239590a;
+  transition: box-shadow 180ms ease, background-color 180ms ease;
+}
+.field input:focus-visible { background: #fff; box-shadow: 0 0 0 5px #55d6da1f; }
+.modal {
+  border-color: #ffffff3d;
+  background: radial-gradient(ellipse at 100% 0%, #305b70, transparent 65%), #223959;
+  box-shadow: 0 32px 100px #10233b66, inset 0 1px 0 #ffffff14;
+}
+.modal::backdrop { background: #14253bb0; backdrop-filter: blur(7px); }
+.modal[open] { animation: modal-arrive 240ms cubic-bezier(.2,.75,.25,1) both; }
+.modal[open]::backdrop { animation: backdrop-arrive 200ms ease both; }
+.modal > h2 { letter-spacing: -.025em; }
+.modal > h2::after {
+  content: ''; display: block; width: 52px; height: 3px; margin-top: 16px;
+  border-radius: 3px; background: #55d6da;
+}
+.modal-close { box-shadow: inset 0 0 0 1px #ffffff26; }
+.service-modal-image { width: min(100%, 280px); filter: drop-shadow(0 12px 16px #10233b33); }
+.service-category {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid #55d6da33; border-radius: 30px;
+  background: #55d6da0d; padding: 5px 10px;
+}
+.service-category::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #55d6da; }
+.service-booking {
+  align-self: start; border: 1px solid #ffffff1f; border-radius: 20px;
+  background: #ffffff06; padding: 24px;
+}
+.service-booking .modal-intro { font-size: 13px; line-height: 1.6; }
+.service-topics { list-style: none; padding: 0; }
+.service-topics li {
+  position: relative; border: 1px solid #ffffff0d; border-radius: 12px;
+  background: #ffffff05; padding: 10px 12px 10px 28px;
+}
+.service-topics li::before {
+  content: ''; position: absolute; left: 12px; top: 18px;
+  width: 4px; height: 4px; border-radius: 50%; background: #55d6da;
+}
+.service-topics li + li { margin-top: 7px; }
+.service-details .service-modal-image { width: 100%; }
+@media(hover:hover) {
+  .service-card:hover { transform: translateY(-5px); filter: drop-shadow(0 6px 7px #22395916); }
+  .service-card:hover::before, .service-card:focus-within::before { opacity: 1; }
+  .button:hover::after { transform: translateX(65%); }
+  .submit:hover { box-shadow: inset 0 1px 0 #ffffff66, 0 8px 24px #38bfc42e; }
+  .arrow:hover { transform: translateX(2px); }
+  .modal-close:hover { background: #315775; }
+}
+@keyframes card-arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes modal-arrive { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes backdrop-arrive { from { opacity: 0; } to { opacity: 1; } }
+@media(max-width:767px) {
+  .services h1 { gap: 18px; }
+  .appointment::after { mask-image: url('assets/mobile-background.png'); }
+  .service-card::before { mask-image: var(--card-mask-mobile); }
+}
+@media(max-width:699px) {
+  .service-booking { padding: 20px; }
+  .service-modal-image { width: min(100%, 220px); }
+}
+@media(max-width:359px) { .service-booking { padding: 16px 12px; } }
+@media(prefers-reduced-motion:reduce) {
+  .service-card, .modal[open], .modal[open]::backdrop { animation: none; }
+  .button::after { display: none; }
+  .service-card:hover, .arrow:hover { transform: none; }
+}

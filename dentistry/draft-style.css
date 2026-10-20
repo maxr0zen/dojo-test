@@ -1,0 +1,65 @@
+@font-face { font-family: Manrope; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/Manrope-Medium.ttf') format('truetype'); }
+@font-face { font-family: Manrope; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/Manrope-SemiBold.ttf') format('truetype'); }
+@font-face { font-family: Unbounded; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/Unbounded-Medium.ttf') format('truetype'); }
+@font-face { font-family: Unbounded; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/Unbounded-SemiBold.ttf') format('truetype'); }
+
+/* Added panels borrow the rounded shapes, cut corners and gradients of the draft. */
+body { background: #f3f6ff; }
+body::before { background: radial-gradient(ellipse at 100% 0, #d6e9fa77, transparent 60%), #f3f6ff; }
+body::after { display: none; }
+.site-header { font-family: Manrope, sans-serif; font-weight: 500; border-color: #dce5f2; border-radius: 0 0 30px 0; background: #f8faffed; box-shadow: 0 8px 24px #22395905; }
+.header-booking { font-family: Manrope, sans-serif; font-size: 13px; font-weight: 600; border-radius: 40px; }
+.header-booking > span { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 20px; width: 20px; height: 20px; line-height: 1; }
+.header-booking svg { display: block; }
+#services { width: 100%; margin: 0; padding: 36px 0; border: 0; border-radius: 0; background: radial-gradient(ellipse at 0 0, #fff, #f7f9ff 80%); box-shadow: none; }
+.services-heading { width: calc(100% - var(--side) * 2); max-width: 1200px; margin: 0 auto 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.services-heading h1 { margin: 0; }
+.services h1::after { display: none; }
+.service-carousel { position: relative; width: calc(100% - var(--side) * 2); max-width: 1200px; margin: 0 auto; }
+.service-carousel .service-track { max-width: 100%; }
+.service-controls { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.service-controls button { position: absolute; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #dbe4ef; border-radius: 50%; color: #223959; background: #fff; box-shadow: 0 4px 16px #22395926; outline: 4px solid #f7f9ff; pointer-events: auto; font-size: 24px; line-height: 1; transition: background 160ms, opacity 160ms; }
+.service-controls .service-prev { left: -16px; }
+.service-controls .service-next { right: -16px; }
+.service-controls .service-next { background: #38bfc4; border-color: #38bfc4; color: white; }
+.service-controls button:disabled { cursor: default; opacity: 0; visibility: hidden; pointer-events: none; }
+.service-controls button:focus-visible { outline: 3px solid #223959; outline-offset: 3px; }
+.field input:not([type=checkbox]) { height: 46px; padding: 12px 14px; border: 1px solid #e0e8f5; border-radius: 12px; background: #f8faff; font-family: Manrope, sans-serif; font-size: 13px; box-shadow: inset 0 1px 2px #22395905; }
+.field input[type=tel] { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.field input:focus-visible { outline: 2px solid #55d6da; outline-offset: 2px; background: white; box-shadow: 0 0 0 5px #55d6da1a; }
+.field input[aria-invalid=true] { border-color: #ffadad; box-shadow: 0 0 0 2px #ffadad55; }
+.booking-zone { border-top: 0; background: radial-gradient(ellipse at 0 90%, #dbe6ff99, transparent 70%), #eef4fc; }
+.modal { background: radial-gradient(ellipse at 0 0, #375e98, #233a5a 70%); border-radius: 30px; }
+.modal > h2 { font-family: Unbounded, Montserrat, sans-serif; font-weight: 500; font-size: 20px; line-height: 1.5; }
+@media(max-width:767px) {
+  .site-header { display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; border-radius: 0 0 24px 0; gap: 8px; }
+  .header-brand { grid-column: 2; grid-row: 1; justify-self: center; gap: 8px; }
+  .header-booking { grid-column: 3; grid-row: 1; justify-self: end; font-size: 0; border-radius: 50%; }
+  #services { padding: 24px 0; }
+  .services-heading { margin-bottom: 24px; gap: 10px; }
+  .service-controls { inset: 16px 0; }
+  .service-controls button { top: calc(50% * 125.1 / 154); }
+  .service-image { height: calc(var(--card) * 125.1 / 154); }
+  .service-card h2, .service-card:first-child h2 { left: calc(var(--card) / 12); top: calc(var(--card) * 103.276 / 154); font-size: clamp(11px, calc(var(--card) / 12), 26px); line-height: 1.25; max-width: 82%; }
+  .service-card.multiline h2 { top: calc(var(--card) * 87.234 / 154); max-width: 65%; }
+  .card-actions { width: var(--card); gap: calc(var(--card) * 6 / 154); }
+  .consult { width: calc(var(--card) * 122.979 / 154); font-size: clamp(10px, calc(var(--card) * 12 / 154), 20px); }
+  .field input:not([type=checkbox]) { font-size: 16px; }
+  .modal > h2 { font-size: 17px; }
+}
+
+.header-logo { width: 228px; height: 56px; flex-shrink: 0; }
+/* Both buttons and the SVG share the row's actual height at every card size. */
+.service-card .card-actions { --action-size: calc(var(--card) * 42 / 384); height: var(--action-size); align-items: center; }
+.service-card .consult { height: var(--action-size); flex-shrink: 0; }
+.service-card .arrow { flex: 0 0 var(--action-size); width: var(--action-size); height: var(--action-size); aspect-ratio: 1; align-self: center; }
+.service-card .arrow picture { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.service-card .arrow img { display: block; width: 100%; height: 100%; max-width: none; object-fit: contain; }
+@media(max-width:767px) { .service-card .card-actions { --action-size: calc(var(--card) * 25.021 / 154); } }
+/* The wordmark sits below the emblem's glint inside the PNG canvas. */
+.header-logo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center calc(50% - 5px); }
+.footer-logo { padding: 0; background: transparent; }
+.footer-logo img { display: block; width: 200px; height: 48px; object-fit: cover; filter: brightness(0) invert(1); }
+@media(max-width:767px) { .header-logo { width: min(200px, calc(100vw - 144px)); height: 48px; } }
+@media(max-width:767px) { .header-logo img { object-position: center calc(50% - 4px); } }
+@media(max-width:480px) { .footer-brand { flex-direction: column; align-items: flex-start; } .footer-booking { max-width: none; } }
