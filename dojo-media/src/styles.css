@@ -124,6 +124,9 @@ footer {
   text-decoration: underline;
 }
 .contact-button {
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
   display: inline-flex;
   justify-content: center;
   align-items: center;

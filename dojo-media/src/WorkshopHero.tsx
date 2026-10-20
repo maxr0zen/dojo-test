@@ -11,11 +11,11 @@ import {
 import { useReducedMotion } from "./motion";
 
 const DURATION = 36;
-const SOURCE = `${import.meta.env.BASE_URL}assets/workshop.png`;
+const SOURCE = `${import.meta.env.BASE_URL}assets/workshop-selected.png`;
 const DESCRIPTION =
   "Мастерская Додзё Медиа: мастера за общим столом с ноутбуками и проектами";
 
-/** Original Figma image, cropped to the current Figma layout and settled in 0.9 seconds. */
+/** Selected workshop illustration, cropped to the hero layout and settled in 0.9 seconds. */
 export function WorkshopComposition() {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -106,8 +106,8 @@ export function WorkshopHero() {
         <img
           src={SOURCE}
           alt=""
-          width="2252"
-          height="904"
+          width="1978"
+          height="795"
           fetchPriority="high"
         />
       ) : (

@@ -1,11 +1,14 @@
 import {
   lazy,
+  createContext,
+  useContext,
   Suspense,
   useEffect,
   useRef,
   useState,
   type MouseEvent,
 } from "react";
+import { ContactDialog } from "./ContactDialog";
 import { CONTACT_HREF, openProject } from "./services/actions";
 import type { ProjectId } from "./services/mockApi";
 import { usePageMotion } from "./motion";
@@ -49,11 +52,14 @@ const projects: {
   },
 ];
 
+const RequestContext = createContext<(opener: HTMLButtonElement) => void>(() => {});
+
 function ContactButton({ onClick }: { onClick?: () => void }) {
+  const openRequest = useContext(RequestContext);
   return (
-    <a className="contact-button" href={CONTACT_HREF} onClick={onClick}>
+    <button className="contact-button" type="button" aria-haspopup="dialog" onClick={(event) => { onClick?.(); openRequest(event.currentTarget); }}>
       Обсудить проект →
-    </a>
+    </button>
   );
 }
 
@@ -204,12 +210,15 @@ function ProjectCard({
 export function App() {
   usePageMotion();
   const [error, setError] = useState("");
+  const [requestOpen, setRequestOpen] = useState(false);
+  const requestTrigger = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (!error) return;
     const timeout = window.setTimeout(() => setError(""), 6000);
     return () => window.clearTimeout(timeout);
   }, [error]);
   return (
+    <RequestContext.Provider value={(opener) => { requestTrigger.current = opener; setRequestOpen(true); }}>
     <div className="page-shell">
       <a className="skip-link" href="#main">
         К содержимому
@@ -236,10 +245,10 @@ export function App() {
             fallback={
               <div className="hero-media">
                 <img
-                  src={`${import.meta.env.BASE_URL}assets/workshop.png`}
+                  src={`${import.meta.env.BASE_URL}assets/workshop-selected.png`}
                   alt="Мастерская Додзё Медиа: мастера за общим столом с ноутбуками и проектами"
-                  width="2252"
-                  height="904"
+                  width="1978"
+                  height="795"
                   fetchPriority="high"
                 />
               </div>
@@ -283,6 +292,7 @@ export function App() {
           <p>Мастерство начинается с деталей.</p>
         </div>
       </footer>
+      <ContactDialog opener={requestTrigger.current} open={requestOpen} onClose={() => setRequestOpen(false)} />
       {error && (
         <div className="toast" role="alert">
           <span>{error}</span>
@@ -296,5 +306,6 @@ export function App() {
         </div>
       )}
     </div>
+    </RequestContext.Provider>
   );
 }
