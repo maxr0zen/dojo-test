@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import { CONTACT_HREF } from "./services/actions";
 import "./contact-dialog.css";
+import { formatPhone, hasPhonePrefix } from "./phone";
 
 function normalizePhone(value: string) {
   const digits = value.replace(/\D/g, "");
@@ -14,6 +15,7 @@ export function ContactDialog({ open, onClose, opener }: { open: boolean; onClos
   const nameInput = useRef<HTMLInputElement>(null);
   const phoneInput = useRef<HTMLInputElement>(null);
   const backdropDown = useRef(false);
+  const phoneCaret = useRef<number | null>(null);
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<{ fullName?: string; phone?: string }>({});
@@ -41,6 +43,33 @@ export function ContactDialog({ open, onClose, opener }: { open: boolean; onClos
     };
   }, [open, opener]);
 
+  useLayoutEffect(() => {
+    const input = phoneInput.current;
+    if (input && phoneCaret.current !== null && document.activeElement === input) {
+      input.setSelectionRange(phoneCaret.current, phoneCaret.current);
+    }
+    phoneCaret.current = null;
+  });
+
+  const updatePhone = (raw: string, caret = raw.length) => {
+    const formatted = formatPhone(raw);
+    let position = formatted.length;
+    if (caret < raw.length) {
+      let offset = raw.slice(0, caret).replace(/\D/g, "").length;
+      if (!hasPhonePrefix(raw) && raw.replace(/\D/g, "")) offset += 1;
+      let count = 0;
+      position = 0;
+      while (position < formatted.length && count < offset) {
+        if (/\d/.test(formatted[position])) count += 1;
+        position += 1;
+      }
+    }
+    phoneCaret.current = position;
+    setPhone(formatted);
+    setErrors((value) => ({ ...value, phone: undefined }));
+    setDraft("");
+  };
+
   const prepareRequest = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const name = fullName.trim().replace(/\s+/g, " ");
@@ -49,7 +78,7 @@ export function ContactDialog({ open, onClose, opener }: { open: boolean; onClos
     if (!/^[\p{L}][\p{L}\p{M} '\u2019-]*$/u.test(name) || name.split(" ").length < 2)
       next.fullName = "Укажите фамилию и имя. Отчество — если есть.";
     if (!normalized || /[^\d+()\s.\-]/.test(phone))
-      next.phone = "Введите номер целиком, например +7 (999) 123-45-67.";
+      next.phone = "Введите номер целиком, например +7 (999)-999-99-99.";
     setErrors(next);
     if (next.fullName || next.phone) {
       (next.fullName ? nameInput : phoneInput).current?.focus();
@@ -91,8 +120,27 @@ export function ContactDialog({ open, onClose, opener }: { open: boolean; onClos
         </div>
         <div className="request-field">
           <label htmlFor="request-phone">Номер телефона</label>
-          <input ref={phoneInput} id="request-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+7 (999) 123-45-67" maxLength={24} required value={phone} aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? "request-phone-error" : undefined}
-            onChange={(event) => { setPhone(event.target.value); setErrors((value) => ({...value,phone:undefined})); setDraft(""); }} />
+          <input ref={phoneInput} id="request-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+7 (999)-999-99-99" maxLength={24} required value={phone} aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? "request-phone-error" : undefined}
+            onChange={(event) => updatePhone(event.currentTarget.value, event.currentTarget.selectionStart ?? event.currentTarget.value.length)}
+            onPaste={(event) => {
+              const value = event.clipboardData.getData("text");
+              if (value.replace(/\D/g, "").length < 10) return;
+              event.preventDefault();
+              updatePhone(value);
+            }}
+            onKeyDown={(event) => {
+              if (!["Backspace", "Delete"].includes(event.key) || event.ctrlKey || event.metaKey || event.altKey) return;
+              const input = event.currentTarget;
+              if (input.selectionStart !== input.selectionEnd) return;
+              const backward = event.key === "Backspace";
+              let index = (input.selectionStart ?? 0) - (backward ? 1 : 0);
+              if (index < 0 || index >= input.value.length || /\d/.test(input.value[index])) return;
+              while (index >= 0 && index < input.value.length && !/\d/.test(input.value[index])) index += backward ? -1 : 1;
+              if (index < 0 || index >= input.value.length) return;
+              event.preventDefault();
+              const raw = input.value.slice(0, index) + input.value.slice(index + 1);
+              updatePhone(raw, index);
+            }} />
           {errors.phone && <p className="request-error" role="alert" id="request-phone-error">{errors.phone}</p>}
         </div>
         {draft ? (
